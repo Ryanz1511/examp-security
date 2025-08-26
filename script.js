@@ -41,14 +41,22 @@ document.addEventListener("visibilitychange", () => {
 });
 
 // Android 
+let touchBlocked = false;
+
 document.addEventListener("touchmove", e => {
   if (window.scrollY <= 0 && e.touches[0].clientY > 200) {
     e.preventDefault();
-  }
-  setTimeout(() => {
-      alert("Akses dilarang!");
 
-      target.style.display = "block";
-    }, 300);
-  
-}, {passive:false});
+    if (!touchBlocked) {
+      touchBlocked = true;
+
+      target.style.display = "none";
+
+      setTimeout(() => {
+        alert("Akses dilarang!");
+        target.style.display = "block";
+        touchBlocked = false; // reset setelah selesai
+      }, 500);
+    }
+  }
+}, { passive: false });
