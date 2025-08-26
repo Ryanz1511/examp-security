@@ -42,7 +42,7 @@ document.addEventListener("visibilitychange", () => {
 
 // Android 
 document.addEventListener("touchmove", e => {
-  if (window.scrollY <= 0 && e.touches[0].clientY > 50) {
+  if (window.scrollY <= 0 && e.touches[0].clientY > 200) {
     e.preventDefault();
   }
   setTimeout(() => {
