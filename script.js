@@ -41,7 +41,6 @@ document.addEventListener("visibilitychange", () => {
 });
 
 // Android
-
 let touchBlocked = false;
 let startY = 0;
 
@@ -50,7 +49,7 @@ document.addEventListener("touchstart", e => {
 }, { passive: true });
 
 document.addEventListener("touchmove", e => {
-  const dy = e.touches[0].clientY - startY;   // + = tarik ke bawah
+  const dy = e.touches[0].clientY - startY; 
   const atTop = window.scrollY <= 0;
 
 
@@ -59,10 +58,10 @@ document.addEventListener("touchmove", e => {
     if (!touchBlocked) {
       touchBlocked = true;
       target.style.display = "none";
+
       setTimeout(() => {
         alert("Akses dilarang!");
         target.style.display = "block";
-      
         setTimeout(() => (touchBlocked = false), 1500);
       }, 200);
     }
