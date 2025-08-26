@@ -40,23 +40,31 @@ document.addEventListener("visibilitychange", () => {
   
 });
 
-// Android 
+// Android
+
 let touchBlocked = false;
+let startY = 0;
+
+document.addEventListener("touchstart", e => {
+  startY = e.touches[0].clientY;
+}, { passive: true });
 
 document.addEventListener("touchmove", e => {
-  if (window.scrollY <= 0 && e.touches[0].clientY > 200) {
+  const dy = e.touches[0].clientY - startY;   // + = tarik ke bawah
+  const atTop = window.scrollY <= 0;
+
+
     e.preventDefault();
 
     if (!touchBlocked) {
       touchBlocked = true;
-
       target.style.display = "none";
-
       setTimeout(() => {
         alert("Akses dilarang!");
         target.style.display = "block";
-        touchBlocked = false; // reset setelah selesai
-      }, 500);
+      
+        setTimeout(() => (touchBlocked = false), 1500);
+      }, 200);
     }
   }
 }, { passive: false });
